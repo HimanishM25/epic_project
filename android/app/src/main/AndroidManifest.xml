@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.epic_project">
    <application
-        android:label="epic_project"
+        android:label="Ceres"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
