@@ -54,12 +54,7 @@ dev_dependencies:
 flutter_native_splash:
   image: assets/icons/splash.png
   color: "#00BF71"
-  android: true
-  ios: true
-  web: false
-  macos: false
-  windows: false
-  linux: false
+
   # The following section is specific to Android packages.
 # The following section is specific to Flutter packages.
 flutter:
