@@ -40,7 +40,6 @@ class _navSetupState extends State<navSetup> {
             Text(
               'Good ${greeting()}',
               style: const TextStyle(
-                color: Colors.black,
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
                 
