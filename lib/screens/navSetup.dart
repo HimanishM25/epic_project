@@ -19,6 +19,17 @@ class _navSetupState extends State<navSetup> {
     const userHomepage(),
     const marketplace(),
   ];
+  Color TimeColor() {
+    var hour = DateTime.now().hour;
+    if (hour < 12) {
+      return Colors.blue;
+    } else if (hour < 17) {
+      return Colors.amber;
+    } else {
+      return Colors.deepOrange;
+    }
+  }
+
   String greeting() {
     var hour = DateTime.now().hour;
     if (hour < 12) {
@@ -35,6 +46,14 @@ class _navSetupState extends State<navSetup> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 100,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: RadialGradient(
+                radius: 1,
+                center: Alignment.topLeft,
+                colors: <Color>[TimeColor(), Colors.transparent]),
+          ),
+        ),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
