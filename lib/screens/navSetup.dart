@@ -13,10 +13,10 @@ class navSetup extends StatefulWidget {
 }
 
 class _navSetupState extends State<navSetup> {
-  int current_index = 0;
+  int current_index = 1;
   final _pages = [
-    const userHomepage(),
     const activeDrives(),
+    const userHomepage(),
     const marketplace(),
   ];
   String greeting() {
@@ -34,21 +34,21 @@ class _navSetupState extends State<navSetup> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 100,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
               'Good ${greeting()}',
               style: const TextStyle(
-                fontSize: 30,
+                fontSize: 35,
                 fontWeight: FontWeight.bold,
-                
               ),
             ),
             const CircleAvatar(
               radius: 20,
               backgroundImage: NetworkImage(
-                  'https://pbs.twimg.com/media/FejTuGpUoAAPexl?format=jpg&name=large'),//add user profile picture after auth. setup
+                  'https://pbs.twimg.com/media/FejTuGpUoAAPexl?format=jpg&name=large'), //add user profile picture after auth. setup
             ),
           ],
         ),
@@ -58,19 +58,26 @@ class _navSetupState extends State<navSetup> {
         data: NavigationBarThemeData(
           indicatorColor: Theme.of(context).primaryColor,
           backgroundColor: Colors.transparent,
+          labelTextStyle: MaterialStateProperty.all(
+            const TextStyle(
+              fontFamily: 'Inter',
+              fontSize: 15,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
         ),
         child: NavigationBar(
           labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
           destinations: const <Widget>[
             NavigationDestination(
-              icon: Icon(Icons.home_outlined),
-              selectedIcon: Icon(Icons.home),
-              label: 'Home',
-            ),
-            NavigationDestination(
               icon: Icon(Icons.favorite_outline),
               selectedIcon: Icon(Icons.favorite),
               label: 'Donate',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.home_outlined),
+              selectedIcon: Icon(Icons.home),
+              label: 'Home',
             ),
             NavigationDestination(
               icon: Icon(Icons.local_grocery_store_outlined),
