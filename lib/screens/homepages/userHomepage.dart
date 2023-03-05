@@ -12,6 +12,8 @@ class userHomepage extends StatefulWidget {
 }
 
 class _userHomepageState extends State<userHomepage> {
+  int totalDonations = 1000;
+  int totalDrives = 10;
   CarouselController buttonCarouselController = CarouselController();
   final List<String> imgList = [
     'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
@@ -24,103 +26,171 @@ class _userHomepageState extends State<userHomepage> {
   @override
   Widget build(BuildContext context) => Padding(
         padding: const EdgeInsets.all(20),
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              const Text('Make Quick Donations',
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                  )),
-              const SizedBox(height: 20),
-              CarouselSlider(
-                items: imgList
-                    .map(
-                      (item) => ClipRRect(
-                          borderRadius: BorderRadius.circular(10.0),
-                          child: Image.network(item, fit: BoxFit.cover)),
-                    )
-                    .toList(),
-                carouselController: buttonCarouselController,
-                options: CarouselOptions(
-                  autoPlay: true,
-                  pauseAutoPlayOnTouch: true,
-                  pauseAutoPlayInFiniteScroll: true,
-                  enlargeCenterPage: true,
-                  padEnds: true,
-                  viewportFraction: 0.7,
-                  aspectRatio: 2.0,
-                  initialPage: 1,
-                ),
-              ),
-              const SizedBox(height: 20),
-              SizedBox(
-                height: 60,
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    backgroundColor: Color(0xFF00C880),
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                    ),
-                  ),
-                  onPressed: () {},
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text('View active campaigns',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            )),
-                        Icon(Icons.arrow_forward)
-                      ],
-                    ),
+        child: SingleChildScrollView(
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                const Text('Make Quick Donations',
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                    )),
+                const SizedBox(height: 20),
+                CarouselSlider(
+                  items: imgList
+                      .map(
+                        (item) => ClipRRect(
+                            borderRadius: BorderRadius.circular(10.0),
+                            child: Image.network(item, fit: BoxFit.cover)),
+                      )
+                      .toList(),
+                  carouselController: buttonCarouselController,
+                  options: CarouselOptions(
+                    autoPlay: true,
+                    pauseAutoPlayOnTouch: true,
+                    pauseAutoPlayInFiniteScroll: true,
+                    enlargeCenterPage: true,
+                    padEnds: true,
+                    viewportFraction: 0.7,
+                    aspectRatio: 2.0,
+                    initialPage: 1,
                   ),
                 ),
-              ),
-              const SizedBox(height: 20),
-              SizedBox(
-                height: 60,
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    backgroundColor: Color(0xFF00C880),
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                const SizedBox(height: 20),
+                SizedBox(
+                  height: 60,
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      backgroundColor: const Color(0xFF00C880),
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                      ),
                     ),
-                  ),
-                  onPressed: () {},
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text('Volunteer',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            )),
-                        Icon(Icons.arrow_forward)
-                      ],
+                    onPressed: () {},
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: const [
+                          Text('View active campaigns',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              )),
+                          Icon(Icons.arrow_forward)
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 20),
-              const Text('Your Stats',
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                  )),
-              const SizedBox(height: 20),
-            ]),
+                const SizedBox(height: 20),
+                SizedBox(
+                  height: 60,
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      backgroundColor: const Color(0xFF00C880),
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                      ),
+                    ),
+                    onPressed: () {},
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: const [
+                          Text('Volunteer',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              )),
+                          Icon(Icons.arrow_forward)
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                const Text('Your Stats',
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                    )),
+                const SizedBox(height: 20),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Container(
+                        width: 150,
+                        height: 150,
+                        decoration: BoxDecoration(
+                          gradient: const LinearGradient(
+                              colors: [Colors.purple, Colors.blue],
+                              begin: Alignment.bottomLeft,
+                              end: Alignment.topRight),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text('Total Donations',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                )),
+                            const SizedBox(height: 10),
+                            Text('Rs. ' + totalDonations.toString(),
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                )),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        width: 150,
+                        height: 150,
+                        decoration: BoxDecoration(
+                          gradient: const LinearGradient(
+                              colors: [Colors.amber, Colors.deepOrange],
+                              begin: Alignment.bottomLeft,
+                              end: Alignment.topRight),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text('Campaigns Helped',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                )),
+                            const SizedBox(height: 10),
+                            Text(totalDrives.toString(),
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                )),
+                          ],
+                        ),
+                      ),
+                    ])
+              ]),
+        ),
       );
 }
