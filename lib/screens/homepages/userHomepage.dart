@@ -14,9 +14,10 @@ class userHomepage extends StatefulWidget {
 class _userHomepageState extends State<userHomepage> {
   int totalDonations = 1000;
   int totalDrives = 10;
+  double driveProgress = 0.2;
   CarouselController buttonCarouselController = CarouselController();
   final List<String> imgList = [
-    'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
+    'https://assets.epicurious.com/photos/568eb0bf7dc604b44b5355ee/16:9/w_2560%2Cc_limit/rice.jpg',
     'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
     'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
     'https://images.unsplash.com/photo-1523205771623-e0faa4d2813d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=89719a0d55dd05e2deae4120227e6efc&auto=format&fit=crop&w=1953&q=80',
@@ -41,20 +42,51 @@ class _userHomepageState extends State<userHomepage> {
                 CarouselSlider(
                   items: imgList
                       .map(
-                        (item) => ClipRRect(
-                            borderRadius: BorderRadius.circular(10.0),
-                            child: Image.network(item, fit: BoxFit.cover)),
+                        (item) => Container(
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(10)),
+                            image: DecorationImage(
+                              image: NetworkImage(item),
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                          child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: LinearProgressIndicator(
+                                    value: driveProgress,
+                                    backgroundColor: Colors.grey,
+                                    valueColor:
+                                        const AlwaysStoppedAnimation<Color>(
+                                            Colors.green),
+                                  ),
+                                ),
+                                Text(
+                                  'Campaign Progress: ' +
+                                      (driveProgress * 100).toInt().toString() +
+                                      '%',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                              ]),
+                        ),
                       )
                       .toList(),
                   carouselController: buttonCarouselController,
                   options: CarouselOptions(
-                    autoPlay: true,
+                    // autoPlay: true, //turend off for sanity while debugging
                     pauseAutoPlayOnTouch: true,
-                    pauseAutoPlayInFiniteScroll: true,
                     enlargeCenterPage: true,
-                    padEnds: true,
-                    viewportFraction: 0.7,
-                    aspectRatio: 2.0,
+                    aspectRatio: 16 / 9,
                     initialPage: 1,
                   ),
                 ),
