@@ -15,9 +15,9 @@ class navSetup extends StatefulWidget {
 class _navSetupState extends State<navSetup> {
   int current_index = 0;
   final _pages = [
-    userHomepage(),
-    activeDrives(),
-    marketplace(),
+    const userHomepage(),
+    const activeDrives(),
+    const marketplace(),
   ];
   String greeting() {
     var hour = DateTime.now().hour;
@@ -35,24 +35,21 @@ class _navSetupState extends State<navSetup> {
     return Scaffold(
       appBar: AppBar(
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Good ' + greeting(),
-              style: TextStyle(
+              'Good ${greeting()}',
+              style: const TextStyle(
                 color: Colors.black,
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
                 
               ),
             ),
-            Text(
-              'Ceres',
-              style: TextStyle(color: Colors.black),
-            ),
-            Text(
-              'Ceres',
-              style: TextStyle(color: Colors.black),
+            const CircleAvatar(
+              radius: 20,
+              backgroundImage: NetworkImage(
+                  'https://pbs.twimg.com/media/FejTuGpUoAAPexl?format=jpg&name=large'),//add user profile picture after auth. setup
             ),
           ],
         ),
