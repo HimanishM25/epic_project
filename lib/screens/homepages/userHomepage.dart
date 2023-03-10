@@ -1,8 +1,11 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:epic_project/screens/DonatePage.dart';
+import 'package:epic_project/screens/activeDrives.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import '../navSetup.dart';
 
 class userHomepage extends StatefulWidget {
   const userHomepage({super.key});
@@ -38,9 +41,32 @@ class _userHomepageState extends State<userHomepage> {
               CarouselSlider(
                 items: imgList
                     .map(
-                      (item) => ClipRRect(
-                          borderRadius: BorderRadius.circular(10.0),
-                          child: Image.network(item, fit: BoxFit.cover)),
+                      (item) =>
+                          Stack(alignment: Alignment.bottomCenter, children: [
+                        ClipRRect(
+                            borderRadius: BorderRadius.circular(10.0),
+                            child: Image.network(item, fit: BoxFit.cover)),
+                        const Padding(
+                          padding: EdgeInsets.fromLTRB(0, 0, 0, 15),
+                          child: Text(
+                            '50% funded',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: LinearProgressIndicator(
+                            value: 0.5,
+                            backgroundColor: Colors.white,
+                            valueColor:
+                                AlwaysStoppedAnimation<Color>(Colors.green),
+                          ),
+                        ),
+                      ]),
                     )
                     .toList(),
                 carouselController: buttonCarouselController,
@@ -61,12 +87,17 @@ class _userHomepageState extends State<userHomepage> {
                 child: TextButton(
                   style: TextButton.styleFrom(
                     foregroundColor: Colors.white,
-                    backgroundColor: Color(0xFF00C880),
+                    backgroundColor: const Color(0xFF00C880),
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => activeDrives()),
+                    );
+                  },
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
                     child: Row(
@@ -78,7 +109,7 @@ class _userHomepageState extends State<userHomepage> {
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
                             )),
-                        Icon(Icons.arrow_forward)
+                        const Icon(Icons.arrow_forward)
                       ],
                     ),
                   ),
@@ -90,12 +121,17 @@ class _userHomepageState extends State<userHomepage> {
                 child: TextButton(
                   style: TextButton.styleFrom(
                     foregroundColor: Colors.white,
-                    backgroundColor: Color(0xFF00C880),
+                    backgroundColor: const Color(0xFF00C880),
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => DonatePage()),
+                    );
+                  },
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
                     child: Row(
@@ -107,7 +143,7 @@ class _userHomepageState extends State<userHomepage> {
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
                             )),
-                        Icon(Icons.arrow_forward)
+                        const Icon(Icons.arrow_forward)
                       ],
                     ),
                   ),
