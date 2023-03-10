@@ -1,4 +1,6 @@
-import 'package:ceres/reusable_widgets/TextWidget.dart';
+import 'package:epic_project/screens/navSetup.dart';
+
+import '/reusable_widgets/TextWidget.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -115,7 +117,16 @@ class _SignInScreenState extends State<SignInScreen> {
                                   //to set border radius to button
                                   borderRadius: BorderRadius.circular(10)),
                             ),
-                            onPressed: () {},
+                          //push navSetup and remove all previous routes
+                            onPressed: () {
+                              Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const navSetup(),
+                                ),
+                                (route) => false,
+                              );
+                            },
                             child: Container(
                               width: 100,
                               height: 45,

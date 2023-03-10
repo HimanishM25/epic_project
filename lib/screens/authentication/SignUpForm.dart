@@ -1,8 +1,10 @@
+import 'package:epic_project/screens/authentication/SignInPage.dart';
+import 'package:epic_project/screens/navSetup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
-import '../reusable_widgets/TextWidget.dart';
+import '/reusable_widgets/TextWidget.dart';
 
 class SignUpForm extends StatefulWidget {
   const SignUpForm({super.key});
@@ -170,7 +172,14 @@ class _SignUpFormState extends State<SignUpForm> {
                             //to set border radius to button
                             borderRadius: BorderRadius.circular(10)),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SignInScreen(),
+                          ),
+                        ); 
+                      },
                       child: Container(
                         height: 45,
                         child: const Center(
