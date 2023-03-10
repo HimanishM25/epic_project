@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
       ),
       themeMode: ThemeMode.system,
       title: 'Ceres',
-      home: const navSetup(),
+      home:  navSetup(),
     );
   }
 }

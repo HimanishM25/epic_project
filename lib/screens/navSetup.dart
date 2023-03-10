@@ -21,13 +21,22 @@ class _navSetupState extends State<navSetup> {
   ];
   String greeting() {
     var hour = DateTime.now().hour;
-    if (hour < 12) {
-      return 'Morning!';
+    if (hour < 12 && current_index == 1) {
+      return 'Good Morning!';
     }
-    if (hour < 17) {
-      return 'Afternoon!';
+    if (hour < 17 && current_index == 1) {
+      return 'Good Afternoon!';
     }
-    return 'Evening!';
+    if (current_index == 1) {
+      return 'Good Evening!';
+    }
+    if (current_index == 0) {
+      return 'Donate Now!';
+    }
+    if (current_index == 2) {
+      return 'Marketplace';
+    }
+    return '';
   }
 
   @override
@@ -39,7 +48,7 @@ class _navSetupState extends State<navSetup> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Good ${greeting()}',
+              '${greeting()}',
               style: const TextStyle(
                 fontSize: 35,
                 fontWeight: FontWeight.bold,
