@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -13,8 +14,6 @@ class activeDrives extends StatefulWidget {
 
 class _activeDrivesState extends State<activeDrives> {
   @override
-  String drive_name = 'Drive Name';
-  String drive_host = 'Unicef';
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(20),
@@ -38,19 +37,28 @@ class _activeDrivesState extends State<activeDrives> {
           ),
           //make a listview of the products
           Expanded(
-            child: ListView.builder(
-              itemCount: 10,
-              itemBuilder: (context, index) {
-                return Card(
-                  child: ListTile(
-                    leading: Image.asset('assets/images/Donateplaceholder.png'),
-                    title: Text('$drive_name'),
-                    subtitle: Text('Organized by ${drive_host}'),
-                    trailing: const Icon(Icons.arrow_forward),
-                  ),
-                );
-              },
-            ),
+            child: StreamBuilder<QuerySnapshot>(
+                stream:
+                    FirebaseFirestore.instance.collection('drives').snapshots(),
+                builder: (BuildContext context,
+                    AsyncSnapshot<QuerySnapshot> snapshot) {
+                  if (snapshot.hasData) {
+                    final snap = snapshot.data!.docs;
+                    return ListView.builder(
+                      itemCount: snap.length,
+                      itemBuilder: (context, index) {
+                        return Card(child: Column(
+                          children: [
+                            Text(snap[index]['DriveName']),
+                            Text(snap[index]['DriveOrganizer']),
+                          ],
+                        ));
+                      },
+                    );
+                  }
+                  else{
+                    return Placeholder();}
+                }),
           ),
         ],
       ),
