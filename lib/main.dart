@@ -1,5 +1,6 @@
 import 'package:epic_project/screens/firstpage.dart';
 import 'package:epic_project/screens/navSetup.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'dart:async';
@@ -7,7 +8,11 @@ import 'package:after_layout/after_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-void main() => runApp(MyApp());
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -40,7 +45,7 @@ class MyApp extends StatelessWidget {
       ),
       themeMode: ThemeMode.system,
       title: 'Ceres',
-      home:  navSetup(),
+      home: navSetup(),
     );
   }
 }
