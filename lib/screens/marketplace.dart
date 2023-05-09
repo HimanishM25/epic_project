@@ -1,5 +1,4 @@
-import 'dart:math';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -12,7 +11,6 @@ class marketplace extends StatefulWidget {
 }
 
 class _marketplaceState extends State<marketplace> {
-  String item_name = 'Watermelon';
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -21,33 +19,53 @@ class _marketplaceState extends State<marketplace> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'Welcome to the Farmer\'s Market!',
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
-          SizedBox(height: 20),
-          Text(
-            'Buy fresh produce directly from farmers.',
+          const SizedBox(
+            height: 20,
+          ),
+          const Text(
+            'Buy fresh produce directly from farmers!',
             style: TextStyle(fontSize: 15),
           ),
-          SizedBox(height: 20),
+          const SizedBox(
+            height: 20,
+          ),
           //make a listview of the products
           Expanded(
-            child: ListView.builder(
-              itemCount: 10,
-              itemBuilder: (context, index) {
-                return Card(
-                  child: ListTile(
-                    leading: Image.asset('assets/images/Marketplaceholder.png'),
-                    title: Text('$item_name'),
-                    subtitle: Text('Price: \$${Random().nextInt(100)}'),
+            child: StreamBuilder<QuerySnapshot>(
+                stream:
+                    FirebaseFirestore.instance.collection('market').snapshots(),
+                builder: (BuildContext context,
+                    AsyncSnapshot<QuerySnapshot> snapshot) {
+                  if (snapshot.hasData) {
+                    final snap = snapshot.data!.docs;
+                    return ListView.builder(
+                      itemCount: snap.length,
+                      itemBuilder: (context, index) {
+                        return Card(
+                          child: ListTile(
+                    leading: Image.network(
+                                snap[index]['ProductImage'],
+                                height: 50,
+                                width: 50,
+                              ),
+                    title: Text(snap[index]['Product']),
+                    subtitle: Text(snap[index]['Price'].toString()),
                     trailing: const Icon(Icons.arrow_forward),
                   ),
-                );
-              },
-            ),
+                          
+                        );
+
+                      },
+                    );
+                  } else {
+                    return const Placeholder();
+                  }
+                }),
           ),
-          
         ],
       ),
     );
