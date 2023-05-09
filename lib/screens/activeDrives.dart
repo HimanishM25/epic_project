@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -47,17 +45,36 @@ class _activeDrivesState extends State<activeDrives> {
                     return ListView.builder(
                       itemCount: snap.length,
                       itemBuilder: (context, index) {
-                        return Card(child: Column(
-                          children: [
-                            Text(snap[index]['DriveName']),
-                            Text(snap[index]['DriveOrganizer']),
-                          ],
+                        return Card(
+                            child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Image.network(
+                                snap[index]['DriveImage'],
+                                height: 50,
+                                width: 50,
+                              ),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Text(snap[index]['DriveName']),
+                                  Text(snap[index]['DriveOrganizer']),
+                                  //Text((snap[index]['EndDate']).toString()),  //timestamp error
+                                ],
+                              ),
+                            ],
+                          ),
                         ));
                       },
                     );
+                  } else {
+                    return Placeholder();
                   }
-                  else{
-                    return Placeholder();}
                 }),
           ),
         ],
