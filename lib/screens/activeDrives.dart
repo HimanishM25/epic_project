@@ -46,30 +46,41 @@ class _activeDrivesState extends State<activeDrives> {
                       itemCount: snap.length,
                       itemBuilder: (context, index) {
                         return Card(
-                            child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Image.network(
+                          child: ListTile(
+                    leading: Image.network(
                                 snap[index]['DriveImage'],
                                 height: 50,
                                 width: 50,
                               ),
-                              SizedBox(
-                                width: 20,
-                              ),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Text(snap[index]['DriveName']),
-                                  Text(snap[index]['DriveOrganizer']),
-                                  //Text((snap[index]['EndDate']).toString()),  //timestamp error
-                                ],
-                              ),
-                            ],
-                          ),
-                        ));
+                    title: Text(snap[index]['DriveName']),
+                    subtitle: Text(snap[index]['DriveOrganizer']),
+                    trailing: const Icon(Icons.arrow_forward),
+                  ),
+                          //   child: Padding(
+                          // padding: const EdgeInsets.all(8.0),
+                          // child: Row(
+                          //   mainAxisAlignment: MainAxisAlignment.start,
+                          //   children: [
+                          //     Image.network(
+                          //       snap[index]['DriveImage'],
+                          //       height: 50,
+                          //       width: 50,
+                          //     ),
+                          //     SizedBox(
+                          //       width: 20,
+                          //     ),
+                          //     Column(
+                          //       mainAxisAlignment: MainAxisAlignment.start,
+                          //       children: [
+                          //         Text(snap[index]['DriveName']),
+                          //         Text(snap[index]['DriveOrganizer']),
+                          //         //Text((snap[index]['EndDate']).toString()),  //timestamp error
+                          //       ],
+                          //     ),
+                          //   ],
+                          // ),
+                        );
+
                       },
                     );
                   } else {
