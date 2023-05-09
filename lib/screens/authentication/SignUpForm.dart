@@ -1,5 +1,6 @@
 import 'package:epic_project/screens/authentication/SignInPage.dart';
 import 'package:epic_project/screens/navSetup.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -103,7 +104,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   const SizedBox(
                     height: 10,
                   ),
-                  reusableTextField(false, user_controller),
+                  TextField(controller: user_controller),
                   const SizedBox(
                     height: 20,
                   ),
@@ -117,7 +118,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   const SizedBox(
                     height: 10,
                   ),
-                  reusableTextField(false, email_controller),
+                  TextField(controller: email_controller),
                   const SizedBox(
                     height: 20,
                   ),
@@ -131,7 +132,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   const SizedBox(
                     height: 10,
                   ),
-                  reusableTextField(true, password_controller),
+                  TextField(controller: password_controller),
                   const SizedBox(
                     height: 20,
                   ),
@@ -145,7 +146,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   const SizedBox(
                     height: 10,
                   ),
-                  reusableTextField(true, confirm_controller),
+                  TextField(controller: confirm_controller),
                   const SizedBox(
                     height: 20,
                   ),
@@ -159,7 +160,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   const SizedBox(
                     height: 10,
                   ),
-                  reusableTextField(false, phone_controller),
+                  TextField(controller: phone_controller),
                   const SizedBox(
                     height: 50,
                   ),
@@ -173,18 +174,13 @@ class _SignUpFormState extends State<SignUpForm> {
                             borderRadius: BorderRadius.circular(10)),
                       ),
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => SignInScreen(),
-                          ),
-                        ); 
+                        Register();
                       },
                       child: Container(
                         height: 45,
                         child: const Center(
                           child: Text(
-                            "Login",
+                            "Register",
                             style: TextStyle(
                               fontWeight: FontWeight.w600,
                               color: Colors.black,
@@ -201,5 +197,21 @@ class _SignUpFormState extends State<SignUpForm> {
         ),
       ),
     );
+  }
+
+  Future Register() async {
+    await FirebaseAuth.instance
+        .createUserWithEmailAndPassword(
+            email: email_controller.text, password: password_controller.text)
+        .then((value) {
+      //navigate to navSetup and remove all previous routes
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => const navSetup()),
+          (route) => false
+      );
+    }).catchError((e) {
+      print(e);
+    });
   }
 }

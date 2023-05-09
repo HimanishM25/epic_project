@@ -1,4 +1,7 @@
+import 'package:epic_project/screens/authentication/SignUpPage.dart';
 import 'package:epic_project/screens/navSetup.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import '/reusable_widgets/TextWidget.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -17,6 +20,11 @@ class _SignInScreenState extends State<SignInScreen> {
   final email_controller = TextEditingController();
   final password_controller = TextEditingController();
   @override
+  void dispose() {
+    email_controller.dispose();
+    password_controller.dispose();
+    super.dispose();
+  }
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
@@ -73,7 +81,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         const SizedBox(
                           height: 10,
                         ),
-                        reusableTextField(false, email_controller),
+                        TextField(controller:email_controller),
                         const SizedBox(
                           height: 20,
                         ),
@@ -87,7 +95,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         const SizedBox(
                           height: 10,
                         ),
-                        reusableTextField(true, password_controller),
+                        TextField(controller: password_controller),
                         const SizedBox(
                           height: 7,
                         ),
@@ -117,15 +125,9 @@ class _SignInScreenState extends State<SignInScreen> {
                                   //to set border radius to button
                                   borderRadius: BorderRadius.circular(10)),
                             ),
-                          //push navSetup and remove all previous routes
+                            
                             onPressed: () {
-                              Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const navSetup(),
-                                ),
-                                (route) => false,
-                              );
+                              Login();
                             },
                             child: Container(
                               width: 100,
@@ -153,7 +155,14 @@ class _SignInScreenState extends State<SignInScreen> {
                     children: [
                       const Text("Don't have an account? "),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SignUpPage(),
+                  ),
+                );
+                        },
                         child: const Text(
                           "Register",
                           style: TextStyle(
@@ -171,5 +180,10 @@ class _SignInScreenState extends State<SignInScreen> {
         ),
       ),
     );
+  }
+
+  Future Login() async{
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email_controller.text.trim(), password: password_controller.text.trim());
   }
 }

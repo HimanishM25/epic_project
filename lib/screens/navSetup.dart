@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
+import 'authentication/AccountPage.dart';
+
 class navSetup extends StatefulWidget {
   const navSetup({super.key});
 
@@ -54,10 +56,22 @@ class _navSetupState extends State<navSetup> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const CircleAvatar(
-              radius: 20,
-              backgroundImage: NetworkImage(
-                  'https://pbs.twimg.com/media/FejTuGpUoAAPexl?format=jpg&name=large'), //add user profile picture after auth. setup
+            GestureDetector(
+              //on tap, go to account page
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const accountPage(),
+                  ),
+                );
+
+              },
+              child: const CircleAvatar(
+                radius: 20,
+                backgroundImage: NetworkImage(
+                    'https://pbs.twimg.com/media/FejTuGpUoAAPexl?format=jpg&name=large'), //add user profile picture after auth. setup
+              ),
             ),
           ],
         ),

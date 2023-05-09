@@ -1,6 +1,9 @@
+import 'package:epic_project/screens/authentication/SignInPage.dart';
+import 'package:epic_project/screens/authentication/SignUpForm.dart';
 import 'package:epic_project/screens/authentication/SignUpPage.dart';
 import 'package:epic_project/screens/firstpage.dart';
 import 'package:epic_project/screens/navSetup.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -46,7 +49,18 @@ class MyApp extends StatelessWidget {
       ),
       themeMode: ThemeMode.system,
       title: 'Ceres',
-      home: SignUpPage(),
+      home: StreamBuilder<User?>(stream:FirebaseAuth.instance.authStateChanges(),
+      builder: (context,snapshot){
+        if(snapshot.connectionState==ConnectionState.waiting){
+          return const Center(child: CircularProgressIndicator());
+        }
+        else if(snapshot.hasData){
+          return  navSetup() ;
+        }
+        else{
+          return  SignUpPage();
+        }
+      }),
     );
   }
 }

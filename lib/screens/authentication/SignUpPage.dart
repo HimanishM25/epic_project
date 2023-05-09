@@ -1,4 +1,5 @@
 import 'package:epic_project/screens/authentication/SignInPage.dart';
+import 'package:epic_project/screens/authentication/SignUpForm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -108,7 +109,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => SignInScreen(),
+                            builder: (context) => SignUpForm(),
                           ));
                             },
                             child: Container(
