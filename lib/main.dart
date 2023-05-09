@@ -1,3 +1,4 @@
+import 'package:epic_project/screens/authentication/SignUpPage.dart';
 import 'package:epic_project/screens/firstpage.dart';
 import 'package:epic_project/screens/navSetup.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -45,7 +46,7 @@ class MyApp extends StatelessWidget {
       ),
       themeMode: ThemeMode.system,
       title: 'Ceres',
-      home: navSetup(),
+      home: SignUpPage(),
     );
   }
 }
