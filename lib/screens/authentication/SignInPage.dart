@@ -184,6 +184,16 @@ class _SignInScreenState extends State<SignInScreen> {
 
   Future Login() async{
     await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: email_controller.text.trim(), password: password_controller.text.trim());
+        email: email_controller.text.trim(), password: password_controller.text.trim()).then((value) {
+      //navigate to navSetup and remove all previous routes
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => const navSetup()),
+          (route) => false
+      );
+    }).catchError((e) {
+      print(e);
+    });
+        
   }
 }
